@@ -47,7 +47,7 @@ def add_contact():
 def edit_contact(id):
 
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM contacts WHERE id = %s', (id))
+    cur.execute('SELECT * FROM contacts WHERE id = {}'.format(id,))
     data = cur.fetchall()
     print(data[0])
 
@@ -71,7 +71,7 @@ def update_contact(id):
 @app.route('/delete/<string:id>')
 def delete_contact(id):
     cur = mysql.connection.cursor()
-    cur.execute('DELETE FROM contacts WHERE id= %s', (id))
+    cur.execute('DELETE FROM contacts WHERE id= {}'.format(id,))
     mysql.connection.commit()
     flash('Contact Removed Successfully')
     return redirect(url_for('index'))
